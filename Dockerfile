@@ -6,9 +6,9 @@ ENV JENKINS_SLAVE_ROOT="/home/user/jenkins-slave"
 
 USER root
 
-# Install some useful but optional packages
+# Install some useful packages
 RUN apt-get update \
- && apt-get install -y socat \
+ && apt-get install -y socat android-tools-adb \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists /var/cache/apt
 

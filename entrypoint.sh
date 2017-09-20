@@ -2,6 +2,12 @@
 
 if [ "$AVD" ]; then
     socat tcp-listen:5555,bind=127.0.0.1,fork tcp:$AVD & SOCAT_PID=$!
+
+    echo "Waiting for AVD to become online..."
+    while ! adb devices | sed -n 2p | grep -q device; do
+        sleep 1
+    done
+    echo "AVD is accessible, starting Jenkins Slave"
 fi
 
 java -jar /swarm.jar \
