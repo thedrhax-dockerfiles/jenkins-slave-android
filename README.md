@@ -18,7 +18,7 @@ docker run -it --rm --name slave -e JENKINS_SLAVE_NAME="test" thedrhax/jenkins-s
 * Make sure that port 50000 of master will be accessible for this slave.
 * [optional] Create separate account and allow it to create slaves or just use your account.
 
-## Slave configuration variables (optional)
+## Slave configuration variables
 
 * `-e JENKINS_MASTER_USERNAME=jenkins` — username for logging into Jenkins
 * `-e JENKINS_MASTER_PASSWORD=jenkins` — password for user specified above
@@ -28,8 +28,9 @@ docker run -it --rm --name slave -e JENKINS_SLAVE_NAME="test" thedrhax/jenkins-s
 * `-e JENKINS_SLAVE_NAME=swarm-$RANDOM` — name of slave displayed in Jenkins
 * `-e JENKINS_SLAVE_WORKERS=1` — number of simultaneously running tasks
 * `-e JENKINS_SLAVE_LABELS` — slave labels which can be used in Jenkins
+
 * `-e AVD=ip_of_avd_container:5555` — attach the running [AVD container](https://github.com/TheDrHax/docker-android-avd) to perform the instrumentation testing
 
 # License
 
-This project is licensed under the GNU General Public License v3.0 - see the LICENSE.md file for details
+This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](./LICENSE) file for details.
