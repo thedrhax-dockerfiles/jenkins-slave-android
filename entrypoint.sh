@@ -5,8 +5,9 @@ if [ "$AVD" ]; then
 
     echo "Waiting for AVD to become online..."
     while ! adb devices | sed -n 2p | grep -q device; do
-        pkill adb
-        sleep 1
+        pkill -9 adb
+        adb devices > /dev/null
+        sleep 10
     done
     echo "AVD is accessible, starting Jenkins Slave"
 fi
