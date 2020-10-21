@@ -4,10 +4,10 @@ This image extends [thedrhax/android-sdk](https://hub.docker.com/r/thedrhax/andr
 
 ## Example
 
-The command listed below will start a slave named "test" that will try to connect to Jenkins located at http://jenkins:8080/ using `jenkins` as login and password. You can change these settings by overriding variables listed below.
+The command listed below will start a slave named "test" that will try to connect to Jenkins located at http://jenkins:8080/. You can the URL by overriding variables listed below.
 
 ```
-docker run -it --rm --name slave -e JENKINS_SLAVE_NAME="test" thedrhax/jenkins-slave-android
+docker run -it --rm --name slave -e SLAVE_NAME="test" -e SLAVE_SECRET=... thedrhax/jenkins-slave-android
 ```
 
 # Advanced options
@@ -15,20 +15,15 @@ docker run -it --rm --name slave -e JENKINS_SLAVE_NAME="test" thedrhax/jenkins-s
 ## Setting up master Jenkins
 
 * Install the [Swarm Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Swarm+Plugin).
-* Make sure that port 50000 of master will be accessible for this slave.
-* [optional] Create separate account and allow it to create slaves or just use your account.
+* Make sure that slave will be able to connect to HTTP and 50000/tcp ports of master.
+* Create a permanent agent and write down the generated token.
 
 ## Slave configuration variables
 
-* `-e JENKINS_MASTER_USERNAME=jenkins` — username for logging into Jenkins
-* `-e JENKINS_MASTER_PASSWORD=jenkins` — password for user specified above
-* `-e JENKINS_MASTER_URL=http://jenkins:8080/` — URL of Jenkins
-
-* `-e JENKINS_SLAVE_MODE=exclusive` — `exclusive` or `normal` are allowed. [[more info]](https://wiki.jenkins-ci.org/display/JENKINS/Swarm+Plugin)
-* `-e JENKINS_SLAVE_NAME=swarm-$RANDOM` — name of slave displayed in Jenkins
-* `-e JENKINS_SLAVE_WORKERS=1` — number of simultaneously running tasks
-* `-e JENKINS_SLAVE_LABELS` — slave labels which can be used in Jenkins
-
+* `-e MASTER_URL=http://jenkins:8080/` — URL of Jenkins
+* `-e SLAVE_NAME=...` — Name of the permanent agent (must be the same as specified in Jenkins)
+* `-e SLAVE_SECRET=...` — Token assigned to this permanent agent by Jenkins
+* `-e SLAVE_ROOT=/home/user/jenkins-slave` — Default working directory
 * `-e AVD=ip_of_avd_container:5555` — attach the running [AVD container](https://github.com/TheDrHax/docker-android-avd) to perform the instrumentation testing
 
 # License
