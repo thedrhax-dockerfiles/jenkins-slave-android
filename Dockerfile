@@ -19,9 +19,8 @@ ENV MASTER_URL="http://jenkins:8080" \
     SLAVE_ROOT="/home/user/jenkins-slave" \
     AVD=""
 
-RUN mkdir -p "$SLAVE_ROOT"
-
 # Install Jenkins slave (swarm)
 ADD root/ /
 
-ENTRYPOINT /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["/swarm.sh"]
